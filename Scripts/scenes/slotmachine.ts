@@ -27,14 +27,9 @@ module scenes {
         // PUBLIC METHODS +++++++++++++++++++++
         
         // Start Method
-        public start(): void {    
-            for (var reel:number; reel < 3; reel++)
-            {
-                this._reels[reel] = new createjs.Bitmap(assets.getResult("Blank"));
-                console.log(this._reels[reel]);
-            }
+        public start(): void {   
             
-            this._reels = new Array<createjs.Bitmap>();//instantiate reels bitmap
+            
             
             
             // add background image to the scene
@@ -60,6 +55,21 @@ module scenes {
             this._spinButton = new objects.Button("SpinButton", 380, 375, false);
             this.addChild(this._spinButton);
             this._spinButton.on("click", this._spinButtonClick, this); 
+        
+            //Initialize Reels
+            this._reels = new Array<createjs.Bitmap>();//instantiate reels bitmap 
+            for (var reel:number = 0; reel < 3; reel++)
+            {
+                this._reels[reel] = new createjs.Bitmap(assets.getResult("Blank"));
+                this._reels[reel].x = 193 + (reel * 79);
+                this._reels[reel].y = 217;
+  
+                this.addChild(this._reels[reel]);
+                
+                console.log("reel" + reel + " " + this._reels[reel]);
+            }
+            
+        
         
             // Setup Background
             this._setupBackground("WhiteBackground");
@@ -149,12 +159,13 @@ module scenes {
             var pokemon:string[] = this._spinReels();
             
             //pass string from pokemon array into new element and add that element into reels
-            this._reels[0].image = assets.getResult(pokemon[0]); //now needs to be added to scene.
-            this._reels[0].x = 193;
-            this._reels[0].y = 217;
-            this.addChild(this._reels[0]);
             
-            
+            for(var reel:number = 0; reel < 3; reel++)
+            {
+                this._reels[reel].image = assets.getResult(pokemon[reel]); //swap the image
+            }
+           
+                       
             
             //For debugging later
             console.log(pokemon[0]);
