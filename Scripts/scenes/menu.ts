@@ -36,7 +36,7 @@ module scenes {
             this._startButton.on("click", this._startButtonClick, this);
            
             // Setup Background
-            this._setupBackground("WhiteBackground");
+            this._setupBackground("WhiteBackground"); //from scene superclass
            
             // FadeIn
             this._fadeIn(500);

@@ -19,13 +19,22 @@ var assetData:objects.Asset[] = [
     {id: "Nextbutton", src:"../../Assets/images/Nextbutton.png"},
     {id: "StartButton", src:"../../Assets/images/StartButton.png"},
     {id: "StartOverButton", src:"../../Assets/images/StartOverButton.png"},
-    {id: "SlotMachine", src:"../../Assets/images/SlotMachine.png"},
-    {id: "Bet1Button", src:"../../Assets/images/Bet1Button.png"},
-    {id: "Bet10Button", src:"../../Assets/images/Bet10Button.png"},
-    {id: "Bet100Button", src:"../../Assets/images/Bet100Button.png"},
-    {id: "SpinButton", src:"../../Assets/images/SpinButton.png"},
+    {id: "SlotMachine", src:"../../Assets/images/Slot Machine Project Image No background, game canvas- Final.png"},
+    {id: "Bet1Button", src:"../../Assets/images/Bet1.png"},
+    {id: "Bet10Button", src:"../../Assets/images/Bet10.png"},
+    {id: "Bet100Button", src:"../../Assets/images/Bet100.png"},
+    {id: "SpinButton", src:"../../Assets/images/HitmontopSpin3.png"},
     {id: "BlackBackground", src:"../../Assets/images/BlackBackground.png"},
-    {id: "WhiteBackground", src:"../../Assets/images/WhiteBackground.png"}
+    {id: "WhiteBackground", src:"../../Assets/images/WhiteBackground.png"},
+    
+    {id: "Blank", src:"../../Assets/images/Blank.png"},
+    {id: "Magikarp", src:"../../Assets/images/Magikarp.png"},
+    {id: "Pikachu", src:"../../Assets/images/Pikachu.png"},
+    {id: "Raikou", src:"../../Assets/images/Raikou.png"},
+    {id: "Jigglypuff", src:"../../Assets/images/Jigglypuff.png"},
+    {id: "Charizard", src:"../../Assets/images/Charizard.png"},
+    {id: "Articuno", src:"../../Assets/images/Articuno.png"},
+    {id: "Voltorb", src:"../../Assets/images/Voltorb.png"}
 ];
 
 function preload() {
@@ -110,9 +119,9 @@ function changeScene(): void {
             currentScene = gameOver;
             console.log("Starting GAME_OVER Scene");
             break;
-    }
+    }//switch
 
     console.log(currentScene.numChildren);
-}
+}//changeScene
 
 window.onload = preload;

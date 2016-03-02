@@ -11,18 +11,24 @@ var scenes;
         // CONSTRUCTOR ++++++++++++++++++++++
         function SlotMachine() {
             _super.call(this);
-            this._grapes = 0;
-            this._bananas = 0;
-            this._oranges = 0;
-            this._cherries = 0;
-            this._bars = 0;
-            this._bells = 0;
-            this._sevens = 0;
+            //In order of decreasing frequency of occurrence
             this._blanks = 0;
+            this._magikarps = 0;
+            this._voltorbs = 0;
+            this._jigglypuffs = 0;
+            this._pikachus = 0;
+            this._charizards = 0;
+            this._raikous = 0;
+            this._articunos = 0;
         }
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
         SlotMachine.prototype.start = function () {
+            for (var reel; reel < 3; reel++) {
+                this._reels[reel] = new createjs.Bitmap(assets.getResult("Blank"));
+                console.log(this._reels[reel]);
+            }
+            this._reels = new Array(); //instantiate reels bitmap
             // add background image to the scene
             this._backgroundImage = new createjs.Bitmap(assets.getResult("SlotMachine"));
             this.addChild(this._backgroundImage);
@@ -39,7 +45,7 @@ var scenes;
             this.addChild(this._bet100Button);
             this._bet100Button.on("click", this._bet100ButtonClick, this);
             // add SpinButton to the scene
-            this._spinButton = new objects.Button("SpinButton", 402, 382, false);
+            this._spinButton = new objects.Button("SpinButton", 380, 375, false);
             this.addChild(this._spinButton);
             this._spinButton.on("click", this._spinButtonClick, this);
             // Setup Background
@@ -59,43 +65,43 @@ var scenes;
         };
         /* When this function is called it determines the betLine results.
         e.g. Bar - Orange - Banana */
-        SlotMachine.prototype._reels = function () {
+        SlotMachine.prototype._spinReels = function () {
             var betLine = [" ", " ", " "];
             var outCome = [0, 0, 0];
             for (var spin = 0; spin < 3; spin++) {
                 outCome[spin] = Math.floor((Math.random() * 65) + 1);
                 switch (outCome[spin]) {
                     case this._checkRange(outCome[spin], 1, 27):
-                        betLine[spin] = "blank";
+                        betLine[spin] = "Blank";
                         this._blanks++;
                         break;
                     case this._checkRange(outCome[spin], 28, 37):
-                        betLine[spin] = "Grapes";
-                        this._grapes++;
+                        betLine[spin] = "Magikarp";
+                        this._magikarps++;
                         break;
                     case this._checkRange(outCome[spin], 38, 46):
-                        betLine[spin] = "Banana";
-                        this._bananas++;
+                        betLine[spin] = "Voltorb";
+                        this._voltorbs++;
                         break;
                     case this._checkRange(outCome[spin], 47, 54):
-                        betLine[spin] = "Orange";
-                        this._oranges++;
+                        betLine[spin] = "Jigglypuff";
+                        this._jigglypuffs++;
                         break;
                     case this._checkRange(outCome[spin], 55, 59):
-                        betLine[spin] = "Cherry";
-                        this._cherries++;
+                        betLine[spin] = "Pikachu";
+                        this._pikachus++;
                         break;
                     case this._checkRange(outCome[spin], 60, 62):
-                        betLine[spin] = "Bar";
-                        this._bars++;
+                        betLine[spin] = "Charizard";
+                        this._charizards++;
                         break;
                     case this._checkRange(outCome[spin], 63, 64):
-                        betLine[spin] = "Bell";
-                        this._bells++;
+                        betLine[spin] = "Raikou";
+                        this._raikous++;
                         break;
                     case this._checkRange(outCome[spin], 65, 65):
-                        betLine[spin] = "Seven";
-                        this._sevens++;
+                        betLine[spin] = "Articuno";
+                        this._articunos++;
                         break;
                 }
             }
@@ -112,8 +118,19 @@ var scenes;
             console.log("Bet 100 Credit");
         };
         SlotMachine.prototype._spinButtonClick = function (event) {
-            console.log("Spin those reels!");
-            console.log(this._reels());
+            console.log("Reels spun");
+            //console.log(this._reels());
+            var pokemon = this._spinReels();
+            //pass string from pokemon array into new element and add that element into reels
+            this._reels[0].image = assets.getResult(pokemon[0]); //now needs to be added to scene.
+            this._reels[0].x = 193;
+            this._reels[0].y = 217;
+            this.addChild(this._reels[0]);
+            //For debugging later
+            console.log(pokemon[0]);
+            console.log(pokemon[1]);
+            console.log(pokemon[2]);
+            console.log(this.numChildren);
         };
         return SlotMachine;
     })(objects.Scene);

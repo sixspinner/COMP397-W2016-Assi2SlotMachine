@@ -26,14 +26,14 @@ module objects {
             this.addChild(this._blackBackground);
         }
         
-        
+        //Scene Transitions------------------------------------------------------------------------------------------------
         // FadeIn method
         protected _fadeIn(transitionTime:number): void {
             createjs.Tween.get(this._blackBackground).to({ alpha: 0 }, transitionTime, createjs.Ease.getPowInOut(2));
         }
         
-        // FadeIn method
-        protected _fadeOut(transitionTime:number,callback:any): void {
+        // FadeOut method
+        protected _fadeOut(transitionTime:number,callback:any): void { //from tweenJS for graphic enhancements
             this._blackBackground.alpha = 0;
             createjs.Tween.get(this._blackBackground).to({ alpha: 1 }, transitionTime, createjs.Ease.getPowInOut(2)).call(callback);
         }
